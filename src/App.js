@@ -5,7 +5,8 @@ import Index from './components/Index'
 import PageNotFound from './components/PageNotFound'
 import User from './components/User'
 import UserUpdate from './components/UserUpdate'
-import TryPic from './components/TryPic'
+import UserPosts from './components/UserPosts'
+import CreatePost from './components/CreatePost'
 
 function App() {
   return (
@@ -13,9 +14,10 @@ function App() {
           <Switch>
             <Route path="/" exact component={Index} />
             <Route path="/user/:id" exact component={User}/>
+            <Route path="/user/posts/:id" exact component={UserPosts}/>
+            <Route path="/user/posts/create/:id" exact component={CreatePost}/>
             <Route path="/user/update/:id" exact component={UserUpdate}/>
             <Route path="/signup" exact component={Signup} />
-            <Route path="/try/:id" exact component={TryPic}/>
             <Route path="/login" exact component={Login}/>
             <Route path="*" exact component={PageNotFound} />
           </Switch>

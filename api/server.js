@@ -11,6 +11,9 @@ app.use(express.static('uploads'));
 const Routes = require('./routes')
 app.use('/api',Routes);
 
+const User = require('./user')
+app.use('/user',User);
+
 app.listen(process.env.PORT || 5000, function(){
     console.log('server running on port 5000');
 })

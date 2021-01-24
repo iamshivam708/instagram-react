@@ -10,7 +10,7 @@ export class User extends Component {
         this.state = {
              id: this.props.match.params.id,
              isAuthorised: 'true',
-             posts:0,
+             posts:'0',
              followers:0,
              following:0,
              user:{},
@@ -31,6 +31,15 @@ export class User extends Component {
           .catch((error) => {
             console.log(error);
           });
+
+          axios.get(`http://localhost:5000/user/posts/${this.state.id}`).then(result =>{
+              console.log(result.data.length);
+              this.setState({
+                  posts: result.data.length
+              })
+          }).catch(err =>{
+              console.log(err);
+          })
         }
       };
     
@@ -46,7 +55,7 @@ export class User extends Component {
                         </div>
                         <div className="col-3">
                             <p>{this.state.posts}</p>
-                            <Link to="/posts">Posts</Link>
+                            <Link to={"/user/posts/"+ this.state.id}>Posts</Link>
                         </div>
                         <div className="col-3">
                         <p>{this.state.followers}</p>
