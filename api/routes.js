@@ -42,6 +42,18 @@ router.post('/login',function(req,res){
     })
 })
 
+//signup geting
+router.get('/get/details/:id',(req,res) =>{
+  var id = req.params.id
+  db.query("SELECT * FROM signup WHERE signup_id != '"+id+"'",function(error,result){
+    if(error){
+      res.status(400).send(error);
+    }else{
+      res.status(200).send(result)
+    }
+  })
+})
+
 //signup details
 router.get('/signup/details/:id',function(req,res){
     var id = req.params.id;

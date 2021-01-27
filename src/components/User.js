@@ -13,7 +13,7 @@ export class User extends Component {
              posts:'0',
              followers:0,
              following:0,
-             user:{},
+             user:{}
         }
     }
 
@@ -21,6 +21,7 @@ export class User extends Component {
         if(this.state.isAuthorised !== sessionStorage.getItem('isLogin')){
             this.props.history.push('/login');
         }else{
+            //getting user details
             axios
           .get(`http://localhost:5000/api/signup/details/${this.state.id}`)
           .then((res) => {
@@ -29,19 +30,61 @@ export class User extends Component {
             });
           })
           .catch((error) => {
-            console.log(error);
+            console.log(error.message);
           });
 
+          //getting posts
           axios.get(`http://localhost:5000/user/posts/${this.state.id}`).then(result =>{
-              console.log(result.data.length);
               this.setState({
                   posts: result.data.length
               })
           }).catch(err =>{
               console.log(err);
           })
-        }
+
+          //getting following
+          axios.get(`http://localhost:5000/user/follow/details/${this.state.id}`)
+            .then((res) => {
+              this.setState({
+                  following: res.data.length
+              })
+        }).catch(err =>{
+            console.log(err);
+        })
+
+        //getting followed
+        axios.get(`http://localhost:5000/user/followed/details/${this.state.id}`)
+            .then((res) => {
+              this.setState({
+                  followers: res.data.length
+              })
+        }).catch(err =>{
+            console.log(err);
+        })
+
       };
+    }
+
+      componentDidUpdate = () =>{
+        if(this.state.id !== sessionStorage.getItem('userId')){
+            document.getElementById('edit').style.display = "none"
+        }else{
+            document.getElementById('follow').style.display = "none";
+        }
+      }
+
+      handleFollow = (e) =>{
+        e.preventDefault();
+        const follow = {
+            follower_id:sessionStorage.getItem('userId'),
+            followed_id: this.state.id
+        }
+        axios.post("http://localhost:5000/user/follow",follow).then(res =>{
+            console.log(res);
+        }).catch(err =>{
+            console.log(err);
+        })
+      }
     
     render() {
         return (
@@ -59,16 +102,17 @@ export class User extends Component {
                         </div>
                         <div className="col-3">
                         <p>{this.state.followers}</p>
-                            <Link to="/followers">Followers</Link>
+                            <Link to={"/followers/"+ this.state.id}>Followers</Link>
                         </div>
                         <div className="col-3">
                         <p>{this.state.following}</p>
-                            <Link to="/following">Following</Link>
+                            <Link to={"/following/"+this.state.id}>Following</Link>
                         </div>
                     </div>
                </div> 
                <div className="container mt-4" align="center">
-                    <Link to={"/user/update/"+ this.state.id} className="btn btn-lg btn-danger">Edit Profile</Link>
+                    <Link id="edit" to={"/user/update/"+ this.state.id} className="btn btn-lg btn-danger">Edit Profile</Link>
+                    <button id="follow" className="btn btn-danger mt-3" onClick={this.handleFollow}>Follow</button>
                </div>
             </div>
         )

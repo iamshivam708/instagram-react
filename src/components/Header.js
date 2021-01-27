@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
-
 export class Header extends Component {
     constructor(props) {
         super(props)
@@ -33,9 +32,9 @@ export class Header extends Component {
     render() {
         return (
             <div>
-                <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                <nav className="navbar navbar-expand-md navbar-light bg-light">
                     <div className="container-fluid">
-                        <Link className="nav-link" to="/">Student</Link>
+                        <Link className="nav-link" to="/">Instagram</Link>
                         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                         </button>
@@ -46,12 +45,12 @@ export class Header extends Component {
                             </li>
                             <li className="nav-item dropdown">
                             
-                            <a className="nav-link dropdown-toggle" href="#dropiten" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a className="nav-link dropdown-toggle" href="#dropitem" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 {this.state.email}
                             </a>
                             <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" id="dropitem">
                                 <Link className="nav-link" to={"/user/"+this.state.userId} id="user">Profile</Link>
-                                <Link className="nav-link" id="logout" onClick={this.handleLogout}>Logout</Link>
+                                <button className="nav-link" id="logout" onClick={this.handleLogout}>Logout</button>
                             </ul>
                             </li>
                             <li className="nav-item">

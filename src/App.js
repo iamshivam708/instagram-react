@@ -7,19 +7,25 @@ import User from './components/User'
 import UserUpdate from './components/UserUpdate'
 import UserPosts from './components/UserPosts'
 import CreatePost from './components/CreatePost'
+import DeletePost from './components/DeletePost'
+import Followers from './components/Followers'
+import Following from './components/Following'
 
 function App() {
   return (
       <BrowserRouter>
           <Switch>
-            <Route path="/" exact component={Index} />
+            <Route path="/" exact component={Index}/>
             <Route path="/user/:id" exact component={User}/>
             <Route path="/user/posts/:id" exact component={UserPosts}/>
+            <Route path="/user/posts/delete/:id" exact component={DeletePost}/>
             <Route path="/user/posts/create/:id" exact component={CreatePost}/>
             <Route path="/user/update/:id" exact component={UserUpdate}/>
-            <Route path="/signup" exact component={Signup} />
-            <Route path="/login" exact component={Login}/>
-            <Route path="*" exact component={PageNotFound} />
+            <Route path="/followers/:id" exact component={Followers}/>
+            <Route path="/following/:id" exact component={Following}/>
+            <Route path="/signup" exact  component={Signup} />
+            <Route path="/login" exact  component={Login}/>
+            <Route path="*" exact  component={PageNotFound} />
           </Switch>
       </BrowserRouter>
   );
