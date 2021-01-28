@@ -10,6 +10,7 @@ import CreatePost from './components/CreatePost'
 import DeletePost from './components/DeletePost'
 import Followers from './components/Followers'
 import Following from './components/Following'
+import SinglePost from './components/SinglePost'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/user/posts/delete/:id" exact component={DeletePost}/>
             <Route path="/user/posts/create/:id" exact component={CreatePost}/>
             <Route path="/user/update/:id" exact component={UserUpdate}/>
+            <Route path="/user/singlepost/:user_id/:post_id" exact component={SinglePost}/>
             <Route path="/followers/:id" exact component={Followers}/>
             <Route path="/following/:id" exact component={Following}/>
             <Route path="/signup" exact  component={Signup} />

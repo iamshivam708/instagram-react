@@ -65,10 +65,10 @@ export class Index extends Component {
                     <h3>All Users Post</h3>
                 {this.state.posts.map(post =>(
                     <div className="row mt-5 mb-5" key={post.post_id} style={{paddingLeft:50+'px',paddingRight:50+'px'}}>
-                        <h3>{post.username}</h3>
+                        <h3><Link to={"/user/" +post.user_id}>{post.username}</Link></h3>
                         <div className="col-8">
                         <img className="img-fluid" src={"/images/posts/"+ post.image} alt="post pic" />
-                        <h3 className="mt-2">{post.title}</h3>
+                        <h3 className="mt-2"><Link to={"/user/singlepost/"+ post.user_id + "/" + post.post_id}>{post.title}</Link></h3>
                         <p className="mt-3">{post.description}</p>
                         </div>
                         <div className="col-4"></div>

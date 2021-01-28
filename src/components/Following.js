@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { Component } from 'react'
 import Header from './Header'
+import {Link} from 'react-router-dom'
 
 export class Following extends Component {
     constructor(props) {
@@ -57,12 +58,19 @@ export class Following extends Component {
                 <Header></Header>
                 <div className="container">
                 {this.state.userDetails.map(userDetail =>(
-                    <div className="row mt-5 mb-5" key={userDetail.signup_id} style={{paddingLeft:50+'px',paddingRight:50+'px'}}>
+                 <div className="row mt-5 mb-5" key={userDetail.signup_id} style={{paddingLeft:50+'px',paddingRight:50+'px'}}>
                     <div className="col-8">
-                    <img className="img-fluid" src={"/images/"+ userDetail.profile} alt="post pic" />
-                    <h3 className="mt-2">{userDetail.username}</h3>
+                        <div className="row">
+                         <img className="img-fluid" src={"/images/"+ userDetail.profile} alt="post pic" />
+                            <div className="col-6">
+                                <h3 className="mt-2"><Link to={"/user/"+userDetail.signup_id}>{userDetail.username}</Link></h3>
+                            </div>
+                            <div className="col-6">
+                            <button className="btn btn-danger mt-3" onClick={this.handleUnfollow(userDetail.signup_id)}>Unfollow</button>
+                            </div>
+                        </div>
                     </div>
-                    <div className="col-4"><button className="btn btn-danger" onClick={this.handleUnfollow(userDetail.signup_id)}>Unfollow</button></div>
+                    <div className="col-4"></div>
                 </div>
                 ))}
                 </div>
