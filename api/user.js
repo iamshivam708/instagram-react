@@ -114,8 +114,20 @@ router.delete('/unfollow/:id&:f_id',(req,res) =>{
         }else{
             res.status(200).send(result);
         }
+    }) 
+})
+
+//user liked post
+router.post('/liked',(req,res)=>{
+    var user_id = req.body.user_id
+    var post_id = req.body.post_id;
+    db.query("INSERT INTO likes(user_id,post_id) VALUES(?,?)",[user_id,post_id],function(error,result){
+        if(error){
+            res.status(400).send(error);
+        }else{
+            res.status(200).send(result);
+        }
     })
-    
 })
 
   module.exports = router
