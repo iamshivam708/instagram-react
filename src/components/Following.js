@@ -42,6 +42,15 @@ export class Following extends Component {
         }
     }
 
+    handleUnfollow = id =>e =>{
+        e.preventDefault();
+        axios.delete(`http://localhost:5000/user/unfollow/${sessionStorage.getItem('userId')}&${id}`).then(res =>{
+            window.location.reload();
+        }).catch(err =>{
+            console.log(err);
+        })
+    }
+
     render() {
         return (
             <div>
@@ -54,7 +63,7 @@ export class Following extends Component {
                     <img className="img-fluid" src={"/images/"+ userDetail.profile} alt="post pic" />
                     <h3 className="mt-2">{userDetail.username}</h3>
                     </div>
-                    <div className="col-4"></div>
+                    <div className="col-4"><button className="btn btn-danger" onClick={this.handleUnfollow(userDetail.signup_id)}>Unfollow</button></div>
                 </div>
                 ))}
                 </div>

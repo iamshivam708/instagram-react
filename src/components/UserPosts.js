@@ -28,12 +28,20 @@ export class UserPosts extends Component {
         }
     }
 
+    componentDidUpdate = () =>{
+        if(this.state.id !== sessionStorage.getItem('userId')){
+            document.getElementById('create').style.display= 'none'
+        }else{
+            document.getElementById('create').style.display="block"
+        }
+    }
+
     render() {
         return (
             <div>
                 <Header></Header>
                 <div className="container mt-5">
-                    <Link to={"/user/posts/create/"+ this.state.id}>Create New</Link>
+                    <Link id="create" to={"/user/posts/create/"+ this.state.id}>Create New</Link>
                     
                     {this.state.posts.map(post =>(
                     <div className="row mt-5 mb-5" key={post.post_id} style={{paddingLeft:50+'px',paddingRight:50+'px'}}>

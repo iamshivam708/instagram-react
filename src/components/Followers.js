@@ -49,7 +49,6 @@ export class Followers extends Component {
                 <div className="container">
                 {this.state.userDetails.map(userDetail =>(
                     <div className="row mt-5 mb-5" key={userDetail.signup_id} style={{paddingLeft:50+'px',paddingRight:50+'px'}}>
-                    <h3>{userDetail.username}</h3>
                     <div className="col-8">
                     <img className="img-fluid" src={"/images/"+ userDetail.profile} alt="post pic" />
                     <h3 className="mt-2">{userDetail.username}</h3>

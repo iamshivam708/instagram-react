@@ -104,4 +104,18 @@ var storage = multer.diskStorage({
   })
 })
 
+//unfollow 
+router.delete('/unfollow/:id&:f_id',(req,res) =>{
+    var id = req.params.id;
+    var f_id = req.params.f_id
+    db.query("DELETE FROM follow WHERE follower_id='"+id+"' AND followed_id='"+f_id+"'",function(error,result){
+        if(error){
+            res.status(400).send(error);
+        }else{
+            res.status(200).send(result);
+        }
+    })
+    
+})
+
   module.exports = router

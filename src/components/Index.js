@@ -12,7 +12,7 @@ export class Index extends Component {
              isAuthorised: 'true',
              posts:[],
              disable:'true',
-             follows:[]
+             suggestions:[]
         }
     }
 
@@ -35,15 +35,13 @@ export class Index extends Component {
           });
 
           //all user details except current user
-          var signup_id = sessionStorage.getItem('userId');
-          axios.get(`http://localhost:5000/api/get/details/${signup_id}`).then(res =>{
+          axios.get(`http://localhost:5000/api/get/details/${id}`).then(res =>{
             this.setState({
-              follows:res.data
+              suggestions:res.data
             })
-          }).catch(err =>{
-            console.log(err);
-          })
-
+            }).catch(err =>{
+              console.log(err);
+            })
           //getting all posts
           var user_id = sessionStorage.getItem('userId');
           axios.get(`http://localhost:5000/user/posts/all/${user_id}`).then(res =>{
@@ -53,7 +51,8 @@ export class Index extends Component {
           }).catch(err =>{
             console.log(err)
           })
-        }
+
+          }
       };
 
     render() {
@@ -78,14 +77,14 @@ export class Index extends Component {
                     </div>
                     <div className="col-3">
                       <h3>Suggestions</h3>
-                    {this.state.follows.map(follow =>(
-                      <div className="row mt-5" key={follow.signup_id}>
+                    {this.state.suggestions.map(suggestion =>(
+                      <div className="row mt-5" key={suggestion.signup_id}>
                         <div className="col-8">
-                          <img src={"/images/"+ follow.profile} height="200px" className="img-fluid"  alt="profile pic" />
+                          <img src={"/images/"+ suggestion.profile} height="200px" className="img-fluid"  alt="profile pic" />
                         </div>
                         <div className="col-4">
-                          <h4>{follow.username}</h4>
-                          <Link to={"/user/" + follow.signup_id} className="btn btn-danger">Follow</Link>
+                          <h4>{suggestion.username}</h4>
+                          <Link to={"/user/" + suggestion.signup_id} className="btn btn-danger">Follow</Link>
                         </div>
                       </div>
                       ))}

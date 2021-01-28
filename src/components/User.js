@@ -80,7 +80,8 @@ export class User extends Component {
             followed_id: this.state.id
         }
         axios.post("http://localhost:5000/user/follow",follow).then(res =>{
-            console.log(res);
+            this.props.history.push("/user/"+sessionStorage.getItem('userId'));
+            window.location.reload()
         }).catch(err =>{
             console.log(err);
         })
